@@ -1,10 +1,14 @@
+<div class="profile-container">
+    <h3 class="profile-name"><%= @user.name %></h3>
+    <%= image_tag('sample-author1.jpg', class: "img-circle pull-left profile-thumb", style: "width: 100px; height: 100px; margin-top: 20px;") %>
+</div>
 <section class="sct-color-1 slice">
   <div class="container-fluid masonry-container">
     <div class="row">
       <div class="col-md-8 col-sm-offset-2">
         <div class="masonry-wrapper-cols">
           <div class="masonry-gutter"></div>
-            <%= @post_images.each do |post_image| %>
+            <% @post_images.each do |post_image| %>
             <div class="masonry-block">
               <div class="block block-image v1">
                 <div class="block-image">
@@ -27,13 +31,14 @@
                       <%= post_image.user.name %>
                     </li>
                     <li>
-                      <a href="#">23 コメント</a>
+                      <%= link_to "#{post_image.post_comments.count} コメント", post_image_path(post_image.id) %>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
             <% end %>
+            <%= paginate @post_images, class: "paginate" %>
         </div>
       </div>
     </div>
